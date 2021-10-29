@@ -1,24 +1,17 @@
-# todolist
+## Desenvolvido por Carlos Augusto Fernandes Filho - carlos.fernandes@ifrj.edu.br
+### Data: 28/10/2021
 
-## Project setup
-```
-npm install
-```
+### Linguagem Vue.js e Bootstrap Vue
+### Utilizei Router e LocalStorage
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+** Sistema de Controle de Preços **
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Objetivo: Calcular preços de venda de produtos baseado nos custos
 
-### Lints and fixes files
-```
-npm run lint
-```
+## To Do: 
+### Somar o custo total
+### Somar as quantidades de todos os produtos
+### Calcular preço mínimo de venda
+### Calcular preço de venda com percentual de lucro informado pelo usuário
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
