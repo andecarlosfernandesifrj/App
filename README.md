@@ -9,7 +9,7 @@
 ### Objetivo: Calcular preços de venda de produtos baseado nos custos
 
 ### To Do: 
-#### Somar o custo total
+#### Somar o custo total - ok
 #### Somar as quantidades de todos os produtos
 #### Calcular preço mínimo de venda
 #### Calcular preço de venda com percentual de lucro informado pelo usuário
