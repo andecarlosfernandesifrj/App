@@ -1,4 +1,4 @@
-## Desenvolvido por Carlos Augusto Fernandes Filho - carlos.fernandes@ifrj.edu.br
+## Desenvolvido por Carlos Augusto Fernandes Filho
 ### Data: 28/10/2021
 
 ### Linguagem Vue.js e Bootstrap Vue
@@ -13,5 +13,5 @@
 #### Somar as quantidades de todos os produtos
 #### Calcular preço mínimo de venda
 #### Calcular preço de venda com percentual de lucro informado pelo usuário
-
+#### Fazer validação dos campos
 
