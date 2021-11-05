@@ -3,6 +3,7 @@
     <div class="h1 ml-3 mt-3" id="icone">
       <i class="bi bi-calendar3"> Produtos</i>
     </div>
+    <b-card class="bg-info" text-variant="white">Total de Produtos no Estoque: {{parseFloat(qtdProdutos)}} unidades</b-card>
     <div v-for="(produto, index) in produtos" :key="index">
       <b-card :title="produto.descricao" class="mb-2">
         <b-card-text>Preço: R${{ parseFloat(produto.precoNota).toFixed(2) }}</b-card-text>
@@ -42,13 +43,13 @@ export default {
     return {
       produtos: [],
       produtoSelecionado: [],
+      qtdProdutos: 0,
     };
   },
 
   created() {
-    this.produtos = localStorage.getItem("produtos")
-      ? JSON.parse(localStorage.getItem("produtos"))
-      : [];
+    this.produtos = localStorage.getItem("produtos") ? JSON.parse(localStorage.getItem("produtos")) : [];
+    this.qtdProdutos = localStorage.getItem("qtdProdutos");
   },
 
   methods: {
@@ -64,10 +65,10 @@ export default {
       this.$refs.modalRemove.hide();
     },
     confirmRemoveProduto() {
+      this.qtdProdutos -= this.produtos[this.produtoSelecionado.index].quantidade;
       this.produtos.splice(this.produtoSelecionado.index, 1);
-
       localStorage.setItem("produtos", JSON.stringify(this.produtos));
-
+      localStorage.setItem("qtdProdutos", JSON.stringify(this.qtdProdutos));
       this.hideModal();
     },
   },

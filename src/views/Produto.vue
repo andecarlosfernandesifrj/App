@@ -92,7 +92,8 @@ export default {
         precoUnitario: 0
         
       },
-      methodSave:"new"
+      methodSave:"new",
+      qtdProdutos: 0,
       
     }
   },
@@ -123,7 +124,17 @@ export default {
        // console.log({name: "list"});
         this.$router.push({name: "listprodutos"});
       }
-    }  
+      this.somarQtdProdutos();
+    },
+      somarQtdProdutos() {
+      let vet = JSON.parse(localStorage.getItem("produtos"));
+      let tot = vet.reduce(function (tot, item) {
+        return tot + parseFloat(item.quantidade);
+      },0);
+      this.qtdProdutos=tot;
+      localStorage.setItem("qtdProdutos", tot);
+     // console.log(this.qtdProdutos);
+    },  
   }
 
 }
