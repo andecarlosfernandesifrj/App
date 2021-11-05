@@ -30,7 +30,7 @@
         inputmode="numeric"
         min="0"
         placeholder="Ex: 3,50"
-        @change="form.precoUnitario=parseFloat(form.precoNota/form.quantidade).toFixed(2)"
+        @change="atualizarCalculos"
         required
         autocomplete="off"
       >
@@ -63,13 +63,14 @@
         inline
         required
         autocomplete="off"
-        @change="form.precoUnitario=parseFloat(form.precoNota/form.quantidade).toFixed(2)"
+        @change="atualizarCalculos"
       >
       </b-form-spinbutton>
       </b-form-group>
       
       <b-card-text>Preço Unitário: R${{ form.precoUnitario }}</b-card-text>
        <!-- <b-card-text>Preço Unitário: {{ calcPreco }}</b-card-text> -->
+      <!-- <b-card-text>Preço Mínimo de Venda: R${{ form.precoMin }}</b-card-text> -->
 
       <b-button type="submit" variant="outline-success" @click="saveProduto">Salvar</b-button>
    
@@ -89,7 +90,8 @@ export default {
         descricao: "",
         precoNota: 0,
         quantidade: 0,
-        precoUnitario: 0
+        precoUnitario: 0,
+        precoMin: 0,
         
       },
       methodSave:"new",
@@ -103,7 +105,12 @@ export default {
         this.methodSave = "update";
         let produtos = JSON.parse(localStorage.getItem("produtos"));
         this.form = produtos[this.$route.params.index];
+       
       }
+       
+      this.qtdProdutos = JSON.parse(localStorage.getItem("qtdProdutos"));
+      this.custoTotal = JSON.parse(localStorage.getItem("custoTotal"));
+      this.calcularPrecoMin();
   },
   
 
@@ -124,7 +131,18 @@ export default {
        // console.log({name: "list"});
         this.$router.push({name: "listprodutos"});
       }
+
       this.somarQtdProdutos();
+      this.calcularPrecoMin();
+    },
+    calcularPrecoUni (){
+      //form.precoUnitario=parseFloat(form.precoNota/form.quantidade).toFixed(2)
+      this.form.precoUnitario=parseFloat(this.form.precoNota/this.form.quantidade).toFixed(2);
+    },
+    atualizarCalculos(){
+      
+      this.calcularPrecoUni();
+      this.calcularPrecoMin();
     },
       somarQtdProdutos() {
       let vet = JSON.parse(localStorage.getItem("produtos"));
@@ -134,7 +152,12 @@ export default {
       this.qtdProdutos=tot;
       localStorage.setItem("qtdProdutos", tot);
      // console.log(this.qtdProdutos);
-    },  
+    }, 
+    calcularPrecoMin() {
+      //console.log(this.form.precoUnitario);
+     
+      this.form.precoMin = (parseFloat(this.form.precoUnitario) +parseFloat(this.custoTotal/this.qtdProdutos)).toFixed(2);
+     },  
   }
 
 }

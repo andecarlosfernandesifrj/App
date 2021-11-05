@@ -9,6 +9,8 @@
         <b-card-text>Preço: R${{ parseFloat(produto.precoNota).toFixed(2) }}</b-card-text>
         <b-card-text>Quantidade: {{ produto.quantidade }}</b-card-text>
         <b-card-text>Preço Unitário: R${{ parseFloat(produto.precoUnitario).toFixed(2) }}</b-card-text>
+        <!-- <b-card-text>Preço Mínimo de Venda: R${{ parseFloat(produto.precoMin).toFixed(2) }}</b-card-text> -->
+        <b-card-text>Preço Mínimo de Venda: R${{ (parseFloat(produto.precoUnitario) + parseFloat(custoTotal/qtdProdutos)).toFixed(2) }}</b-card-text>
         <b-button variant="outline-secondary" class="mr-2" @click="edit(index)"
           >Editar</b-button
         >
@@ -44,12 +46,14 @@ export default {
       produtos: [],
       produtoSelecionado: [],
       qtdProdutos: 0,
+      custoTotal: 0,
     };
   },
 
   created() {
     this.produtos = localStorage.getItem("produtos") ? JSON.parse(localStorage.getItem("produtos")) : [];
     this.qtdProdutos = localStorage.getItem("qtdProdutos");
+    this.custoTotal = localStorage.getItem("custoTotal");
   },
 
   methods: {
