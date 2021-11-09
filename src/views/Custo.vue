@@ -10,9 +10,11 @@
           v-model="form.custo"
           type="text"
           placeholder="Ex: Aluguél"
-          required
           autocomplete="off"
+          required
+          
         >
+          <!-- :state="!validation" -->    
         </b-form-input>
       </b-form-group>
 
@@ -27,9 +29,10 @@
           required
           autocomplete="off"
         >
+        <!-- :state="!validation" -->
         </b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="outline-success" @click="saveTask"
+      <b-button type="submit" variant="outline-success" :disabled="validation" @click="saveTask"
         >Salvar</b-button
       >
     </b-form>
@@ -51,7 +54,7 @@ export default {
       custoTotal: 0,
     };
   },
-
+  
   created() {
     if (this.$route.params.index === 0 || this.$route.params.index !== undefined) {
       this.methodSave = "update";
@@ -87,6 +90,11 @@ export default {
 //      console.log(this.custoTotal);
     },
   },
+  computed: {
+    validation() {
+        return this.form.custo.length > 3 && this.form.valor > 0 ? false : true;
+    }
+  }
 };
 </script>
 

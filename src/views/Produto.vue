@@ -15,6 +15,7 @@
         placeholder="Ex: Caneta"
         required
         autocomplete="off"
+        :state="!validationProd"
       >
       </b-form-input>
       </b-form-group>
@@ -33,6 +34,7 @@
         @change="atualizarCalculos"
         required
         autocomplete="off"
+        :state="!validationPreco"
       >
       </b-form-input>
       </b-form-group>
@@ -64,6 +66,7 @@
         required
         autocomplete="off"
         @change="atualizarCalculos"
+        :state="!validationQtd"
       >
       </b-form-spinbutton>
       </b-form-group>
@@ -72,7 +75,7 @@
        <!-- <b-card-text>Preço Unitário: {{ calcPreco }}</b-card-text> -->
       <!-- <b-card-text>Preço Mínimo de Venda: R${{ form.precoMin }}</b-card-text> -->
 
-      <b-button type="submit" variant="outline-success" @click="saveProduto">Salvar</b-button>
+      <b-button type="submit" variant="outline-success" :disabled="validation" @click="saveProduto">Salvar</b-button>
    
     </b-form>
     
@@ -158,8 +161,21 @@ export default {
      
       this.form.precoMin = (parseFloat(this.form.precoUnitario) +parseFloat(this.custoTotal/this.qtdProdutos)).toFixed(2);
      },  
-  }
-
+  },
+   computed: {
+    validation() {
+        return this.form.descricao.length > 3 && this.form.precoNota > 0 && this.form.quantidade > 0 ? false : true;
+    },
+    validationProd() {
+        return this.form.descricao.length > 3 ? false : true;
+    },
+    validationPreco() {
+        return this.form.precoNota > 0 ? false : true;
+    },
+    validationQtd() {
+        return this.form.quantidade > 0 ? false : true;
+    },
+   }
 }
 </script>
 
